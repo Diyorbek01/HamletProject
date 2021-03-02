@@ -177,25 +177,25 @@
         </div>
         <div class="row">
         	<div class="col-md-12">
+				{% for announcement in announcements %}
             <div class="carousel-properties owl-carousel">
-							{% for i in announcments %}
             	<div class="item">
             		<div class="project">
 		    					<div class="img">
-				    				<img src="{{ i.image.url }}" class="img-fluid" alt="Colorlib Template">
+				    				<img src="{{ announcement.image.url }}" class="img-fluid" alt="Colorlib Template">
 				    				<div class="text">
-				    					<span>{{ i.status }}</span>
-				    					<h3><a href="properties.html">{{i.title }}<br> Subdivision</a></h3>
+				    					<span>{{ announcement.status }}</span>
+				    					<h3><a href="properties.html">{{announcement.title }}</a></h3>
 				    				</div>
 			    				</div>
 			    				<div class="desc pt-3">
-			    					<h4 class="price">${{ i.price }}</h4>
-										<p class="h-info"><span class="location">{{ i.region }} {{ i.district }}</span> <span class="details">&mdash; 3bds, 2bath</span></p>
+			    					<h4 class="price">${{ announcement.price }}</h4>
+										<p class="h-info"><span class="location">{{ announcement.region }} {{ announcement.district }}</span> <span class="details">&mdash; {{ announcement.features }}</span></p>
 			    				</div>
 		    				</div>
             	</div>
 				{% endfor %}
-            	<div class="item">
+            	{% comment %} <div class="item">
             		<div class="project">
 		    					<div class="img">
 				    				<img src="{% static 'images/work-1.jpg' %}" class="img-fluid" alt="Colorlib Template">
@@ -257,7 +257,7 @@
 										<p class="h-info"><span class="location">New York</span> <span class="details">&mdash; 3bds, 2bath</span></p>
 			    				</div>
 		    				</div>
-            	</div>
+            	</div> {% endcomment %}
             </div>
         </div>
 			</div>

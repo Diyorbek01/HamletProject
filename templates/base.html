@@ -43,22 +43,30 @@
 {% url 'properties' as properties %}
 {% url 'agents' as agents %}
 {% url 'blog' as blog %}
+{% url 'add' as add %}
 {% url 'about' as about %}
 {% url 'contact' as contact %}
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
 	        	<li class="nav-item {% if request.path == index %} active {% endif %}"><a href="/" class="nav-link">Home</a></li>
+            {% if not user.is_authenticated %}
+            <li class="nav-item {% if request.path == add %} active {% endif %}"><a href="{{username}}add" class="nav-link">Add Announcement</a></li>
+            {% endif %}
 	        	<li class="nav-item {% if request.path == properties %} active {% endif %}"><a href="properties" class="nav-link">Properties</a></li>
 	        	<li class="nav-item {% if request.path == agents %} active {% endif %}"><a href="agents" class="nav-link">Agents</a></li>
 	        	<li class="nav-item {% if request.path == blog %} active {% endif %}"><a href="blog" class="nav-link">Blog</a></li>
 	        	<li class="nav-item {% if request.path == about %} active {% endif %}"><a href="about" class="nav-link">About</a></li>
 	          <li class="nav-item {% if request.path == contact %} active {% endif %}"><a href="contact" class="nav-link">Contact</a></li>
-            <li class="nav-item" background="white"><a href="accounts/login" class="nav-link"><span>Sign in</span></a></li>
+
             {% if user.is_authenticated %}
-	            <li class="nav-item cta"><a href="accounts/logout" class="nav-link"><span>Logout</span></a></li>
+            <li class="nav-item"><a href="{{username}}accounts/login" class="nav-link"><span>Sign in</span></a></li>
+            {% endif %}
+            
+            {% if not user.is_authenticated %}
+	          <li class="nav-item cta"><a href="{{username}}/" class="nav-link"><span>Logout</span></a></li>
             {% else %}
-              <li class="nav-item cta"><a href="accounts/registration" class="nav-link"><span>Sign up</span></a></li>
+              <li class="nav-item cta"><a href="{{username}}accounts/registration" class="nav-link"><span>Sign up</span></a></li>
             {% endif %}
             
 	        </ul>

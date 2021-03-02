@@ -7,12 +7,13 @@ from .forms import loginForm, registerForm
 def registration(request):
     if request.method == 'POST':
         register_form = registerForm(request.POST)
-        first_name = register_form.cleaned_data['first_name']
-        last_name = register_form.cleaned_data['last_name']
-        email = register_form.cleaned_data['email']
-        username = register_form.cleaned_data['username']
-        password1 = register_form.cleaned_data['password1']
-        password2 = register_form.cleaned_data['password2']
+        if register_form.is_valid():
+            first_name = register_form.cleaned_data['first_name']
+            last_name = register_form.cleaned_data['last_name']
+            email = register_form.cleaned_data['email']
+            username = register_form.cleaned_data['username']
+            password1 = register_form.cleaned_data['password1']
+            password2 = register_form.cleaned_data['password2']
 
 
         if password1 == password2:
@@ -28,6 +29,8 @@ def registration(request):
         else:
             messages.info(request,"Passwords are not valid!")
             return redirect('registration')
+            author = auth.authenticate(username=username, password=password1)
+            auth.login(request, author)
         return redirect('../' + username)
     else:
         register_form = registerForm()
